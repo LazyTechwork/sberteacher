@@ -14,8 +14,7 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.0",
         "laravel/sanctum": "^2.6",
-        "laravel/tinker": "^2.0",
-        "ext-http": "*"
+        "laravel/tinker": "^2.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.8",

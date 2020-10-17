@@ -34,6 +34,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Task whereText($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Task whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int|null $cover_attachment
+ * @method static \Illuminate\Database\Eloquent\Builder|Task whereCoverAttachment($value)
  */
 class Task extends Model
 {

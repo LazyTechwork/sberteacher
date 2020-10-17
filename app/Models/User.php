@@ -51,6 +51,7 @@ class User extends Authenticatable
 
     protected $guarded = [];
     protected $with = ['role', 'modules'];
+    protected $appends = ['full_name', 'name'];
     protected $hidden = ['password'];
 
     public function role()
@@ -61,5 +62,15 @@ class User extends Authenticatable
     public function modules()
     {
         return $this->hasMany(Module::class);
+    }
+
+    public function getFullNameAttribute()
+    {
+        return "{$this->first_name} {$this->middle_name} {$this->last_name}";
+    }
+
+    public function getNameAttribute()
+    {
+        return $this->last_name . " " . mb_substr($this->first_name, 0, 1) . ". " . mb_substr($this->middle_name, 0, 1) . ".";
     }
 }

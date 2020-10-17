@@ -36,7 +36,7 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->renderable(function (AuthenticationException $e, Request $request) {
-            return HTTPUtils::returnJsonErrorResponse($request->bearerToken(), 401);
+            return HTTPUtils::returnJsonErrorResponse(HTTPUtils::$UNAUTHORIZED, 401);
         });
     }
 }

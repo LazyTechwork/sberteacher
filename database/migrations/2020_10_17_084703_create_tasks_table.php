@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Attachment;
+use App\Models\Module;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,13 +18,13 @@ class CreateTasksTable extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->string("name");
-            $table->string("cover_type")->nullable();
-            $table->string("cover_embed")->nullable();
+            $table->enum("cover_type", ["youtube", "image"])->nullable();
+            $table->foreignIdFor(Attachment::class, "cover_attachment")->nullable();
             $table->longText("text");
-            $table->jsonb("attachments")->nullable();
+            $table->string("attachments")->nullable();
             $table->enum("task_type", ["check", "radio", "short_answer", "long_answer", "theory"])->default("theory");
             $table->jsonb("task_data")->nullable();
-            $table->foreignIdFor(\App\Models\Module::class, "module_id");
+            $table->foreignIdFor(Module::class, "module_id");
             $table->timestamps();
         });
     }
