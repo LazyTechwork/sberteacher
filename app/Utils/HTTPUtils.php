@@ -8,22 +8,39 @@ use Illuminate\Support\MessageBag;
 
 class HTTPUtils
 {
-    public static function returnJsonResponse($data, $error = false)
+    /**
+     * @param $data
+     * @param int $status
+     * @param false $error
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public static function returnJsonResponse($data, $status = 200, $error = false)
     {
-        return response()->json(["status" => $error ? "error" : "ok", "data" => $data]);
+        return response()->json(["status" => $error ? "error" : "ok", "data" => $data], $status);
     }
 
-    public static function returnJsonErrorResponse($message)
+    /**
+     * @param $message
+     * @param int $status
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public static function returnJsonErrorResponse($message, $status = 400)
     {
-        return self::returnJsonResponse(["error" => $message], true);
+        return self::returnJsonResponse(["error" => $message], $status, true);
     }
 
-    public static function returnJsonErrorBag(MessageBag $messageBag)
+    /**
+     * @param MessageBag $messageBag
+     * @param int $status
+     * @param null $data
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public static function returnJsonErrorBag(MessageBag $messageBag, $status = 422, $data = [])
     {
         $messages = [];
         foreach ($messageBag->getMessages() as $param => $message)
             $messages[$param] = $message[0];
 
-        return self::returnJsonResponse(["error" => "Validation error", "messages" => $messages], true);
+        return self::returnJsonResponse(array_merge(["error" => "validation", "messages" => $messages], $data), $status, true);
     }
 }

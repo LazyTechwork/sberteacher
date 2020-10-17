@@ -22,6 +22,7 @@ class CreateTasksTable extends Migration
             $table->jsonb("attachments")->nullable();
             $table->enum("task_type", ["check", "radio", "short_answer", "long_answer", "theory"])->default("theory");
             $table->jsonb("task_data")->nullable();
+            $table->foreignIdFor(\App\Models\Module::class, "module_id");
             $table->timestamps();
         });
     }

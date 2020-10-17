@@ -21,7 +21,7 @@ class CreateModulesTable extends Migration
             $table->unsignedSmallInteger("grade")->comment("Класс");
             $table->unsignedSmallInteger("difficulty")->comment("Сложность");
             $table->foreignIdFor(User::class, "user_id");
-            $table->enum('status', ['pending', 'banned', 'accepted'])->default('pending');
+            $table->enum('status', ['pending', 'sbercheck', 'needcorrections', 'accepted', 'removed'])->default('pending');
             $table->timestamps();
         });
     }

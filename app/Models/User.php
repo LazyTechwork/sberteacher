@@ -20,6 +20,28 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|User query()
  * @mixin \Eloquent
+ * @property int $id
+ * @property string $first_name Имя
+ * @property string $middle_name Отчество
+ * @property string $last_name Фамилия
+ * @property string $affiliation Организация
+ * @property string $email
+ * @property string $password
+ * @property int $trust_factor Фактор доверия
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Role[] $role
+ * @property-read int|null $role_count
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereAffiliation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereFirstName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereLastName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereMiddleName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereTrustFactor($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  */
 class User extends Authenticatable
 {

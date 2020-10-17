@@ -24,7 +24,8 @@ class AuthorizationController extends Controller
             "agent"    => ['required', 'string', 'max:255'],
         ]);
         if ($validator->fails()) {
-            return HTTPUtils::returnJsonErrorBag($validator->errors());
+            dd($request->all());
+            return HTTPUtils::returnJsonErrorBag($validator->errors(), 422, $request->all());
         }
 //        Getting all variables
         $email = $request->get('email');
@@ -36,10 +37,10 @@ class AuthorizationController extends Controller
 
 //        Checking password
         if (!$user || !Hash::check($password, $user->password))
-            return HTTPUtils::returnJsonErrorResponse("Wrong email or password");
+            return HTTPUtils::returnJsonErrorResponse("login_fail");
 
 //        Creating token and returning response
         $token = $user->createToken($agent);
-        return HTTPUtils::returnJsonResponse(["token" => $token->plainTextToken]);
+        return HTTPUtils::returnJsonResponse(["token" => $token->accessToken->token]);
     }
 }
