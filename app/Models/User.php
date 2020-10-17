@@ -48,7 +48,7 @@ class User extends Authenticatable
     use HasFactory, Notifiable, HasApiTokens;
 
     protected $guarded = [];
-    protected $with = ['role'];
+    protected $with = ['role', 'modules'];
     protected $hidden = ['password'];
 
     public function role()

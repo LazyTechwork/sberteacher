@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthorizationController;
 use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 });*/
 
 Route::post('authorize', [AuthorizationController::class, "auth"]);
-Route::middleware("auth:api")->group(function () {
+Route::middleware("auth:sanctum")->group(function () {
+    Route::get('user', [UserController::class, "info"]);
     Route::post('module', [ModuleController::class, "create"]);
 });

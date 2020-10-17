@@ -21,7 +21,7 @@ class ModuleController extends Controller
             return HTTPUtils::returnJsonErrorBag($validator->errors(), 422);
 
         $data = $request->only(["name", "subject", "grade", "difficulty"]);
-        $data["user_id"] = \Auth::user()->id;
+        $data["user_id"] = $request->user()->id;
         $module = Module::create($data);
         return HTTPUtils::returnJsonResponse($module);
     }

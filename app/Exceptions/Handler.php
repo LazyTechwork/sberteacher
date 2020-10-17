@@ -2,7 +2,10 @@
 
 namespace App\Exceptions;
 
+use App\Utils\HTTPUtils;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Request;
 
 class Handler extends ExceptionHandler
 {
@@ -32,6 +35,8 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        //
+        $this->renderable(function (AuthenticationException $e, Request $request) {
+            return HTTPUtils::returnJsonErrorResponse($request->bearerToken(), 401);
+        });
     }
 }

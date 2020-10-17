@@ -39,7 +39,7 @@ class AuthorizationController extends Controller
             return HTTPUtils::returnJsonErrorResponse("login_fail");
 
 //        Creating token and returning response
-        $token = $user->createToken($agent);
-        return HTTPUtils::returnJsonResponse(["token" => $token->accessToken->token, "user" => $user]);
+        $token = $user->createToken($agent)->plainTextToken;
+        return HTTPUtils::returnJsonResponse(["token" => $token, "user" => $user]);
     }
 }
