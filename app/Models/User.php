@@ -44,6 +44,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Module[] $modules
  * @property-read int|null $modules_count
+ * @property-read mixed $full_name
+ * @property-read mixed $name
  */
 class User extends Authenticatable
 {

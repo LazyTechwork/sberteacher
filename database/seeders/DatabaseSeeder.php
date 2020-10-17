@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Module;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,5 +16,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(RolesSeed::class);
         $this->call(TestUsers::class);
+        $this->call(ModulesSeed::class);
     }
 }

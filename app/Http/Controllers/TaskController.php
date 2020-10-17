@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Module;
 use App\Utils\HTTPUtils;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 
 class TaskController extends Controller
@@ -36,6 +37,11 @@ class TaskController extends Controller
         ]);
         if ($validator->fails())
             return HTTPUtils::returnJsonErrorBag($validator->errors(), 422);
+
+        if ($request->has('cover_file')) {
+            $cover = $request->file('cover_file');
+            Storage::putFile('attachments', $cover);
+        }
 
         $data = $request->only(["name", "subject", "grade", "difficulty", "description", "fgos"]);
         $data["user_id"] = $request->user()->id;
