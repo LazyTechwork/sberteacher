@@ -34,5 +34,12 @@ use Illuminate\Database\Eloquent\Model;
 class Module extends Model
 {
     use HasFactory;
+
     protected $guarded = [];
+    protected $with = ['tasks'];
+
+    public function tasks()
+    {
+        return $this->hasMany(Task::class);
+    }
 }

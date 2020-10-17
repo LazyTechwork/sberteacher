@@ -13,8 +13,9 @@ class ModuleController extends Controller
         $validator = validator($request->all(), [
             "name"       => ["required", "max:255", "string"],
             "subject"    => ["required", "max:255", "string"],
+            "desciption" => ["required"],
             "grade"      => ["required", "integer", "between:1,11"],
-            "difficulty" => ["required", "max:255", "string"],
+            "difficulty" => ["required", "integer", "between:1,10"],
         ]);
         if ($validator->fails())
             return HTTPUtils::returnJsonErrorBag($validator->errors(), 422);
