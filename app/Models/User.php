@@ -26,4 +26,10 @@ class User extends Authenticatable
     use HasFactory, Notifiable, HasApiTokens;
 
     protected $guarded = [];
+    protected $with = ['role'];
+
+    public function role()
+    {
+        return $this->belongsToMany(Role::class, "role_user");
+    }
 }
