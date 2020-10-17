@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthorizationController;
+use App\Http\Controllers\ModuleController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,3 +20,6 @@ use Illuminate\Support\Facades\Route;
 });*/
 
 Route::post('authorize', [AuthorizationController::class, "auth"]);
+Route::middleware("auth:api")->group(function () {
+    Route::post('module', [ModuleController::class, "create"]);
+});

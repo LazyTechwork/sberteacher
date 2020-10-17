@@ -49,9 +49,15 @@ class User extends Authenticatable
 
     protected $guarded = [];
     protected $with = ['role'];
+    protected $hidden = ['password'];
 
     public function role()
     {
         return $this->belongsToMany(Role::class, "role_user");
+    }
+
+    public function modules()
+    {
+        return $this->hasMany(Module::class);
     }
 }
