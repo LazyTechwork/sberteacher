@@ -29,17 +29,29 @@ class ModuleController extends Controller
     public function get(Request $request)
     {
         $validator = validator($request->all(), [
-            "id"      => ["integer", "required_without:user_id"],
-            "user_id" => ["integer", "required_without:id"],
+            "id" => ["integer"],
         ]);
         if ($validator->fails())
             return HTTPUtils::returnJsonErrorBag($validator->errors(), 422);
 
-        if ($id = $request->get("id"))
-            $module = Module::find($id)->first();
-        else
-            $module = Module::whereUserId($request->get('user_id'));
+        $module = Module::find($request->get('id'))->first();
 
         return HTTPUtils::returnJsonResponse($module);
+    }
+
+    public function all(Request $request)
+    {
+        $validator = validator($request->all(), [
+            "user_id" => ['integer'],
+        ]);
+        if ($validator->fails())
+            return HTTPUtils::returnJsonErrorBag($validator->errors(), 422);
+
+        if ($id = $request->get("user_id"))
+            $modules = Module::whereUserId($request->get('user_id'))->get();
+        else
+            $modules = Module::all();
+
+        return HTTPUtils::returnJsonResponse($modules);
     }
 }
