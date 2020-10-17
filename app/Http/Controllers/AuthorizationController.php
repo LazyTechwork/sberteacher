@@ -33,8 +33,12 @@ class AuthorizationController extends Controller
 
 //        Getting user with email
         $user = User::where('email', $email)->first();
+
+//        Checking password
         if (!$user || !Hash::check($password, $user->password))
             return HTTPUtils::returnJsonErrorResponse("Wrong email or password");
+
+//        Creating token and returning response
         $token = $user->createToken($agent);
         return HTTPUtils::returnJsonResponse(["token" => $token->plainTextToken]);
     }
