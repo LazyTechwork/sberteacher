@@ -20,6 +20,7 @@ Route::post('authorize', [AuthorizationController::class, "auth"]);
 Route::middleware("auth:sanctum")->group(function () {
     Route::get('user', [UserController::class, "info"]);
     Route::post('module', [ModuleController::class, "create"]);
+    Route::patch('module', [ModuleController::class, "edit"]);
     Route::get('module', [ModuleController::class, "get"]);
     Route::get('modules', [ModuleController::class, "all"]);
 });

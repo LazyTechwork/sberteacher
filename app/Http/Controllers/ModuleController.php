@@ -71,9 +71,9 @@ class ModuleController extends Controller
             return HTTPUtils::returnJsonErrorBag($validator->errors(), 422);
 
         if ($id = $request->get("user_id"))
-            $modules = Module::whereUserId($request->get('user_id'))->get();
+            $modules = Module::whereUserId($request->get('user_id'))->active()->get();
         else
-            $modules = Module::all();
+            $modules = Module::active()->get();
 
         return HTTPUtils::returnJsonResponse($modules);
     }

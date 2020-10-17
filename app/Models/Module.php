@@ -36,6 +36,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read int|null $tasks_count
  * @method static \Illuminate\Database\Eloquent\Builder|Module whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Module whereFgos($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Module active()
  */
 class Module extends Model
 {
@@ -47,5 +48,10 @@ class Module extends Model
     public function tasks()
     {
         return $this->hasMany(Task::class);
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', '!=', 'removed');
     }
 }

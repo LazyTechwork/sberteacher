@@ -23,7 +23,7 @@ class CreateModulesTable extends Migration
             $table->text('description')->comment("Описание")->nullable();
             $table->string('fgos')->comment("Элементы по ФГОС")->nullable();
             $table->foreignIdFor(User::class, "user_id");
-            $table->enum('status', ['pending', 'sbercheck', 'needcorrections', 'accepted', 'removed'])->default('pending');
+            $table->enum('status', ['pending', 'sbercheck', 'needcorrections', 'approved', 'removed'])->default('pending');
             $table->timestamps();
         });
     }
