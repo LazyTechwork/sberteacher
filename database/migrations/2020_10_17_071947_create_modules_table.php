@@ -20,7 +20,8 @@ class CreateModulesTable extends Migration
             $table->string("subject")->comment("Предмет");
             $table->unsignedSmallInteger("grade")->comment("Класс");
             $table->unsignedSmallInteger("difficulty")->comment("Сложность");
-            $table->text('description')->nullable();
+            $table->text('description')->comment("Описание")->nullable();
+            $table->string('fgos')->comment("Элементы по ФГОС")->nullable();
             $table->foreignIdFor(User::class, "user_id");
             $table->enum('status', ['pending', 'sbercheck', 'needcorrections', 'accepted', 'removed'])->default('pending');
             $table->timestamps();

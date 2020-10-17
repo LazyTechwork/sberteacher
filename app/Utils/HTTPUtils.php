@@ -8,6 +8,12 @@ use Illuminate\Support\MessageBag;
 
 class HTTPUtils
 {
+
+    public static $VALIDATION_ERROR = "validation";
+    public static $LOGIN_FAIL = "login_fail";
+    public static $UNAUTHORIZED = "unauthorized";
+    public static $MODULE_NOTFOUND = "module_notfound";
+
     /**
      * @param $data
      * @param int $status
@@ -41,6 +47,6 @@ class HTTPUtils
         foreach ($messageBag->getMessages() as $param => $message)
             $messages[$param] = $message[0];
 
-        return self::returnJsonResponse(array_merge(["error" => "validation", "messages" => $messages], $data), $status, true);
+        return self::returnJsonResponse(array_merge(["error" => self::$VALIDATION_ERROR, "messages" => $messages], $data), $status, true);
     }
 }

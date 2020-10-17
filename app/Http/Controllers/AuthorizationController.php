@@ -36,7 +36,7 @@ class AuthorizationController extends Controller
 
 //        Checking password
         if (!$user || !Hash::check($password, $user->password))
-            return HTTPUtils::returnJsonErrorResponse("login_fail");
+            return HTTPUtils::returnJsonErrorResponse(HTTPUtils::$LOGIN_FAIL);
 
 //        Creating token and returning response
         $token = $user->createToken($agent)->plainTextToken;

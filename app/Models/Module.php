@@ -30,6 +30,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Module whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Module whereUserId($value)
  * @mixin \Eloquent
+ * @property string|null $description Описание
+ * @property string|null $fgos Элементы по ФГОС
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Task[] $tasks
+ * @property-read int|null $tasks_count
+ * @method static \Illuminate\Database\Eloquent\Builder|Module whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Module whereFgos($value)
  */
 class Module extends Model
 {

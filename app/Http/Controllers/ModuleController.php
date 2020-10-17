@@ -13,15 +13,36 @@ class ModuleController extends Controller
         $validator = validator($request->all(), [
             "name"       => ["required", "max:255", "string"],
             "subject"    => ["required", "max:255", "string"],
-            "desciption" => ["required"],
+            "fgos"       => ["max:255", "string"],
             "grade"      => ["required", "integer", "between:1,11"],
             "difficulty" => ["required", "integer", "between:1,10"],
         ]);
         if ($validator->fails())
             return HTTPUtils::returnJsonErrorBag($validator->errors(), 422);
 
-        $data = $request->only(["name", "subject", "grade", "difficulty"]);
+        $data = $request->only(["name", "subject", "grade", "difficulty", "description", "fgos"]);
         $data["user_id"] = $request->user()->id;
+        $module = Module::create($data);
+        return HTTPUtils::returnJsonResponse($module);
+    }
+
+    public function edit(Request $request)
+    {
+        $validator = validator($request->all(), [
+            "id"         => ["required", "integer"],
+            "name"       => ["max:255", "string"],
+            "subject"    => ["max:255", "string"],
+            "fgos"       => ["max:255", "string"],
+            "grade"      => ["integer", "between:1,11"],
+            "difficulty" => ["integer", "between:1,10"],
+        ]);
+        if ($validator->fails())
+            return HTTPUtils::returnJsonErrorBag($validator->errors(), 422);
+
+        $data = $request->only(["name", "subject", "grade", "difficulty", "description", "fgos"]);
+        $module = Module::find($request->get('id'));
+        if (!$module)
+            return HTTPUtils::returnJsonErrorResponse(HTTPUtils::$MODULE_NOTFOUND, 404);
         $module = Module::create($data);
         return HTTPUtils::returnJsonResponse($module);
     }
@@ -34,7 +55,9 @@ class ModuleController extends Controller
         if ($validator->fails())
             return HTTPUtils::returnJsonErrorBag($validator->errors(), 422);
 
-        $module = Module::find($request->get('id'))->first();
+        $module = Module::find($request->get('id'));
+        if (!$module)
+            return HTTPUtils::returnJsonErrorResponse(HTTPUtils::$MODULE_NOTFOUND, 404);
 
         return HTTPUtils::returnJsonResponse($module);
     }
