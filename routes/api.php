@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthorizationController;
 use App\Http\Controllers\ModuleController;
+use App\Http\Controllers\TaskController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,4 +24,5 @@ Route::middleware("auth:sanctum")->group(function () {
     Route::patch('module', [ModuleController::class, "edit"]);
     Route::get('module', [ModuleController::class, "get"]);
     Route::get('modules', [ModuleController::class, "all"]);
+    Route::post('task', [TaskController::class, "create"]);
 });
