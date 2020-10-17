@@ -16,10 +16,10 @@ class CreateModulesTable extends Migration
     {
         Schema::create('modules', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
-            $table->string("subject");
-            $table->unsignedSmallInteger("grade");
-            $table->unsignedSmallInteger("difficulty");
+            $table->string("name")->comment("Название модуля");
+            $table->string("subject")->comment("Предмет");
+            $table->unsignedSmallInteger("grade")->comment("Класс");
+            $table->unsignedSmallInteger("difficulty")->comment("Сложность");
             $table->foreignIdFor(User::class, "user_id");
             $table->enum('status', ['pending', 'banned', 'accepted'])->default('pending');
             $table->timestamps();
