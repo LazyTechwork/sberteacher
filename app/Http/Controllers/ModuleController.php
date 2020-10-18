@@ -84,7 +84,8 @@ class ModuleController extends Controller
         if (!$id)
             return HTTPUtils::returnJsonErrorResponse(HTTPUtils::$MODULE_NOTFOUND, 404);
         $module = Module::find($id);
-        $module->update(["status" => "removed"]);
+        if ($module)
+            $module->update(["status" => "removed"]);
         return HTTPUtils::returnJsonResponse(Module::active()->get());
     }
 }

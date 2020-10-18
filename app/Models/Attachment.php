@@ -52,4 +52,13 @@ class Attachment extends Model
     {
         return self::create(['name' => $name, 'type' => 'link', 'data' => $link]);
     }
+
+    public static function bulkLink($links, $name)
+    {
+        $data = [];
+        foreach ($links as $link)
+            $data[] = ['name' => $name, 'type' => 'link', 'data' => $link];
+
+        return self::create($data);
+    }
 }
