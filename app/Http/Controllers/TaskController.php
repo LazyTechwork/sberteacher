@@ -48,13 +48,10 @@ class TaskController extends Controller
 
         if ($request->has("attachments")) {
             $attachments = $request->file("attachments.*");
-            foreach ($attachments as $attachment) {
-
-            }
+            Attachment::bulkUpload($attachments, $request->get("name"));
         }
 
         $data["user_id"] = $request->user()->id;
-//        $module = Module::create($data);
         return HTTPUtils::returnJsonResponse($module);
     }
 }

@@ -77,4 +77,14 @@ class ModuleController extends Controller
 
         return HTTPUtils::returnJsonResponse($modules);
     }
+
+    public function delete(Request $request)
+    {
+        $id = $request->get('id');
+        if (!$id)
+            return HTTPUtils::returnJsonErrorResponse(HTTPUtils::$MODULE_NOTFOUND, 404);
+        $module = Module::find($id);
+        $module->update(["status" => "removed"]);
+        return HTTPUtils::returnJsonResponse(Module::active()->get());
+    }
 }

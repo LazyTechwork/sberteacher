@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * App\Models\Attachment
@@ -28,4 +30,26 @@ use Illuminate\Database\Eloquent\Model;
 class Attachment extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
+
+    public static function upload(UploadedFile $file, $name)
+    {
+        $file = Storage::putFile('attachments', $file);
+        return self::create(['name' => $name, 'type' => 'document', 'data' => $file]);
+    }
+
+    public static function bulkUpload(UploadedFile $files, $name)
+    {
+        $data = [];
+        foreach ($files as $file) {
+            $data[] = ['name' => $name, 'type' => 'document', 'data' => Storage::putFile('attachments', $file)];
+        }
+        return self::create($data);
+    }
+
+    public static function link($link, $name)
+    {
+        return self::create(['name' => $name, 'type' => 'link', 'data' => $link]);
+    }
 }
