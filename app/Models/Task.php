@@ -40,4 +40,12 @@ use Illuminate\Database\Eloquent\Model;
 class Task extends Model
 {
     use HasFactory;
+
+    protected $guarded = [];
+    protected $with = ['cover'];
+
+    public function cover()
+    {
+        return $this->belongsTo(Attachment::class, "cover_attachment", 'id');
+    }
 }

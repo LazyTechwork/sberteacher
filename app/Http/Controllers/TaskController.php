@@ -48,9 +48,9 @@ class TaskController extends Controller
         $data = $request->only(["name", "cover_type", "text", "task_type", "task_data", "module_id"]);
 
         if ($request->has('cover_file'))
-            $data["cover_attachment"] = Attachment::upload($request->file('cover_file'), $request->get('name'));
+            $data["cover_attachment"] = Attachment::upload($request->file('cover_file'), $request->get('name'))->id;
         else
-            $data["cover_attachment"] = Attachment::link($request->get("cover_youtube"), $request->get("name"));
+            $data["cover_attachment"] = Attachment::link($request->get("cover_youtube"), $request->get("name"))->id;
 
         $data['attachments'] = [];
 
@@ -69,7 +69,8 @@ class TaskController extends Controller
         }
 
         $data['attachments'] = implode(",", $data['attachments']);
-        Task::create($data);
-        return HTTPUtils::returnJsonResponse($module);
+        $task = Task::create($data);
+        $task = $task->fresh();
+        return HTTPUtils::returnJsonResponse($task);
     }
 }
