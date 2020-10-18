@@ -11,3 +11,5 @@
 Frontend устанавливается как обычный проект JS - `npm install`. Далее, чтобы запустить - `npm run serve`. В main.js не забудьте поменять точку входа в API на свою (под которым запущен сервер Laravel).
 
 _**НЕ ЗАБУДЬТЕ ВЫКЛЮЧИТЬ ADBLOCK. БАГ, О КОТОРОМ МЫ ЗАБЫЛИ))**_
+
+FRONTEND: https://github.com/lazytechwork/sberteacher-frontend
